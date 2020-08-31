@@ -1,7 +1,7 @@
-package Blockchain;
+package blockchain;
 
 public class TestBlockchain {
-	public static void main (String args[]) {
+	public static void main (String args[]) throws Throwable {
 		
 		Blockchain tcpCoin = new Blockchain();
 		Block a = new Block("0x200",new java.util.Date(), "<transactions>");
@@ -12,11 +12,13 @@ public class TestBlockchain {
 		tcpCoin.addBlock(b);
 		tcpCoin.addBlock(c);
 		
+		
+		
 		//tcpCoin.getLatestBlock();
 		
 		tcpCoin.displayChain();
 		
-		tcpCoin.isValid();
+		//tcpCoin.isValid();
 	}
 
 }

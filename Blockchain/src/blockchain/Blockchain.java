@@ -1,8 +1,14 @@
-package Blockchain;
+package blockchain;
+import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.List;
+import rsa.RSA;
+
 
 public class Blockchain {
+	String privateRandom;
+	String publicRandom;
+	String random;
 	
 	private List<Block> chain;
 	
@@ -41,7 +47,7 @@ public class Blockchain {
 		return this.chain.get(chain.size()-1);
 	}
 	
-	public void isValid() {
+	public void isValid() throws Throwable { //alterações de throws
 		for(int i=chain.size()-1; i>0;i--) {
 			if(!(chain.get(i).getHash().equals(chain.get(i).computeHash()))) {
 				System.out.println("Chain is not valid");
@@ -52,8 +58,34 @@ public class Blockchain {
 				System.out.println("Chain is not valid");
 				return;
 			}
+			
+			//alterações
+			KeyPair pair;
+			
+			pair = RSA.generateKeyPair();
+			
+			privateRandom = RSA.encrypt(random, pair.getPublic());
+			publicRandom = RSA.decrypt(random, pair.getPrivate());
+			
+			if(!(random.equals(publicRandom))) {
+				System.out.println("Chain is not valid / Authentication fault");
+				
+			}
+			
 		}
+		
 		System.out.println("Chain is valid");
 	}
-
+	
+// verificar se as assinaturas via no cabeçalho do bloco
 }
+
+			
+			
+				
+			
+		
+	
+
+
+
