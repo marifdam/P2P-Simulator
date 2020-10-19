@@ -1,5 +1,4 @@
 package rsa;
-
 import javax.crypto.Cipher;
 import java.io.InputStream;
 import java.security.*;
@@ -89,11 +88,12 @@ public class RSA {
         String decipheredMessage = decrypt(cipherText, pair.getPrivate());
 
         System.out.println(decipheredMessage);
-        
 
         //Let's sign our message
-        
+        String signature = sign("foobar", pair.getPrivate());
+
+        //Let's check the signature
+        boolean isCorrect = verify("foobar", signature, pair.getPublic());
+        System.out.println("Signature correct: " + isCorrect);
     }
 }
-
-

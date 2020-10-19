@@ -2,7 +2,7 @@ package key;
 
 public class Random {
 	 
-	public String randomString(int n) { 
+	public static String randomString(int n) { 
 	 String randomString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	                                    + "0123456789"
 	                                    + "abcdefghijklmnopqrstuvxyz"; 
