@@ -3,10 +3,16 @@ package p2p;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JOptionPane;
-
+/**
+ * Servidor
+ * @author mari
+ *
+ */
 public class Server {
 	public static void main(String[] args) throws IOException {
 		int Port = Integer.parseInt(JOptionPane.showInputDialog("Input Your Port : "));
@@ -17,12 +23,8 @@ public class Server {
 		out.writeUTF("i am fine, thank you");
 		DataInputStream in = new DataInputStream(Sock.getInputStream());
 		System.out.println(in.readUTF());
-		sum();
+
 		Sock.close();
-	}
-	
-	public static void sum() {
-		System.out.println(2+3);
+
 	}
 }
-

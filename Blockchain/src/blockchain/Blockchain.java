@@ -1,10 +1,17 @@
 package blockchain;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.List;
 import rsa.RSA;
 
-
+/**
+ * BlockChain em si
+ * @author mari
+ *
+ */
 public class Blockchain {
 	String privateRandom;
 	String publicRandom;
@@ -77,7 +84,23 @@ public class Blockchain {
 		System.out.println("Chain is valid");
 	}
 	
-// verificar se as assinaturas via no cabeçalho do bloco
+	public void fileKeys(String code, int i) {
+		try(BufferedWriter bf = new BufferedWriter(new FileWriter("codes"+i+".txt"))){
+			bf.write(code);
+			bf.newLine();
+		}catch(IOException e) {
+			e.getMessage();
+		}
+	}
+	
+	public void users(String pubkey,int i) {
+		try(BufferedWriter bf = new BufferedWriter(new FileWriter("users"+i+".txt"))){
+			bf.write(pubkey);
+			bf.newLine();
+		}catch(IOException e) {
+			e.getMessage();
+		}
+	}
 }
 
 			

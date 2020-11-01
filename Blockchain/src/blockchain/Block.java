@@ -4,7 +4,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Date;
-
+/**
+ * Cria um novo bloco
+ * @author mari
+ *
+ */
 public class Block {
 	
 	private String version;
@@ -12,6 +16,7 @@ public class Block {
 	private String hash;
 	private String previousHash;
 	private String data;
+	private String signature;
 	
 	public Block(String version, Date timestamp, String data) {
 		this.version = version;
@@ -77,4 +82,14 @@ public class Block {
 	public void setData(String data) {
 		this.data = data;
 	}
+
+	public String getSignature() {
+		return signature;
+	}
+
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+	
+	
 }

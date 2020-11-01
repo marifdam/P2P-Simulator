@@ -1,5 +1,9 @@
 package key;
-
+/**
+ * Gerador de chaves aleatorias
+ * @author mari
+ *
+ */
 public class Random {
 	 
 	public static String randomString(int n) { 

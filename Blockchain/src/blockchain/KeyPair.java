@@ -1,5 +1,10 @@
 package blockchain;
 import rsa.*;
+/**
+ * Codificacao dos codigos dos certificados
+ * @author mari
+ *
+ */
 public class KeyPair {
 	private static java.security.KeyPair pair;
 
@@ -20,11 +25,4 @@ public class KeyPair {
 		return msg;
 	}
 	
-	public static KeyPair publicKey() {
-		return (KeyPair) pair.getPublic();
-	}
-	
-	public static KeyPair privateKey() {
-		return (KeyPair) pair.getPrivate();
-	}
 }

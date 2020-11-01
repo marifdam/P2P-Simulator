@@ -5,7 +5,11 @@ import java.security.*;
 import java.util.Base64;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-
+/**
+ * Alterar essa classe
+ * @author mari
+ *
+ */
 public class RSA {
     public static KeyPair generateKeyPair() throws Exception {
         KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");

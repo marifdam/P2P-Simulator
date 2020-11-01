@@ -7,7 +7,11 @@ import java.net.Socket;
 
 
 import javax.swing.JOptionPane;
-
+/**
+ * Cliente
+ * @author mari
+ *
+ */
 public class Client {
 	
 	public static void main(String[] args) throws IOException {

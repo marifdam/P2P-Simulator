@@ -1,5 +1,9 @@
 package blockchain;
-
+/**
+ * Geracao dos blocos que eu ainda tenho que fazer
+ * @author mari
+ *
+ */
 public class TestBlockchain {
 	public static void main (String args[]) throws Throwable {
 		
