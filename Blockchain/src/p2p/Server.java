@@ -17,6 +17,12 @@ public class Server {
 		out.writeUTF("i am fine, thank you");
 		DataInputStream in = new DataInputStream(Sock.getInputStream());
 		System.out.println(in.readUTF());
+		sum();
 		Sock.close();
 	}
+	
+	public static void sum() {
+		System.out.println(2+3);
+	}
 }
+
