@@ -7,7 +7,7 @@ public class client {
 		int filesize = 1022386;
 		int bytesRead;
 		int currentTot = 0;
-		Socket socket = new Socket("127.0.1.1", 15123);
+		Socket socket = new Socket("192.168.1.173", 6066);
 		byte[] bytearray = new byte[filesize];
 		InputStream is = socket.getInputStream();
 		FileOutputStream fos = new FileOutputStream("copy");
