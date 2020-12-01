@@ -11,14 +11,14 @@ import java.util.Date;
  */
 public class Block {
 	
-	private String version;
+	private int version;
 	private Date TimeStamp;
 	private String hash;
 	private String previousHash;
 	private String data;
 	private String signature;
 	
-	public Block(String version, Date timestamp, String data) {
+	public Block(int version, Date timestamp, String data) {
 		this.version = version;
 		this.TimeStamp = timestamp;
 		this.data = data;
@@ -43,11 +43,11 @@ public class Block {
 		return encoded;
 	}
 	
-	public String getversion() {
+	public int getversion() {
 		return version;
 	}
 	
-	public void setVersion(String version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 	

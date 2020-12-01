@@ -47,6 +47,7 @@ public class CertificateCode {
 		PublicKey pubkey = pair.getPublic();
 		PrivateKey privKey = pair.getPrivate();
 		String code = Random.randomString(20);
+		writeCode(code);
 		System.out.println("Codigo sem encriptar:\n"+code);
 		System.out.println("Seu codigo nao encriptado e as chaves estao no arquivo code,publickey e privatekey.");
 		String newCode = RSA.encrypt(code, pubkey);
@@ -108,8 +109,25 @@ public class CertificateCode {
 			System.out.println("Codigo original:\n"+code);
 			System.out.println("\nCodigo decriptado:\n"+original);
 			
+			BufferedReader bf = new BufferedReader(new FileReader("originalCodes.txt"));
+			String bflines = bf.readLine();
 			
+			while(bflines != null) {
+				String compare = bflines;
+				if(compare.equals(original)){
+					System.out.println("Seu codigo e valido.");
+				}
+				bflines = bf.readLine();
+			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void writeCode(String code) {
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter("originalCodes.txt",true))){
+			bw.write(code);
+			bw.newLine();
+		}catch(IOException e) {
 			e.printStackTrace();
 		}
 	}

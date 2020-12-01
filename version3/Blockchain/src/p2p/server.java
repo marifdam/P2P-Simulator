@@ -12,6 +12,7 @@ public class server {
 	public static void main (String [] args ) throws IOException { 
 		ServerSocket serverSocket = new ServerSocket(6066); 
 		Socket socket = new Socket();
+		System.out.println(socket);
 		socket = serverSocket.accept();
 		System.out.println("Accepted connection : " + socket); 
 		

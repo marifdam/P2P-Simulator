@@ -25,7 +25,7 @@ public class Blockchain {
 	}
 	
 	private Block generateGenesis() {
-		Block genesis = new Block("0x200",new java.util.Date(),"<transactions>");
+		Block genesis = new Block(0,new java.util.Date(),"<transactions>");
 		genesis.setPreviousHash(null);
 		genesis.computeHash();
 		return genesis;
