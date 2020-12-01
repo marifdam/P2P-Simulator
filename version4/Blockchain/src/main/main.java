@@ -3,6 +3,8 @@ package main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
+
 import blockchain.Block;
 import blockchain.Blockchain;
 import blockchain.CertificateCode;
