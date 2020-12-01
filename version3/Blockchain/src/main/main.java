@@ -64,7 +64,9 @@ public class main {
 		System.out.println("Menu");
 		System.out.println("1- Gerar novo codigo");
 		System.out.println("2- Validar codigo");
-		System.out.println("3- Sair");
+		System.out.println("3- Enviar arquivos");
+		System.out.println("4- Receber arquivos");
+		System.out.println("5- Sair");
 		opc = sc.nextLine();
 		switch(opc) {
 		case "1":
@@ -78,7 +80,19 @@ public class main {
 			System.out.println("\n");
 			menu();
 		case "3":
-			break;
+			server server = new server();
+			server.server();
+			System.out.println("\n");
+			menu();
+		case "4":
+			client client = new client();
+			client.client();
+			System.out.println("\n");
+			menu();
+		case "5":
+			System.out.println("Aplicação fechada.");
+			System.exit(0);
+			
 	}
 
 }
