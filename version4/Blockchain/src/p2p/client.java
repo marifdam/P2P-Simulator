@@ -18,9 +18,17 @@ public class client {
 				fileOutputStream.write(buffer, 0, bytes);
 				size -= bytes; // read upto file size
 			}
+			File f = new File("originalCodes.txt");
+			if(f.exists() == true) {
 			compareFile();
+			}else {
+				System.out.println("Transferencia concluida.");
+				File r = new File("copia.txt");
+				r.renameTo(new File("originalCodes.txt"));
+			}
 			fileOutputStream.close();
 			dataInputStream.close();
+			socket.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
