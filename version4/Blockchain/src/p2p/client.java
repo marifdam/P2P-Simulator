@@ -1,13 +1,16 @@
 package p2p;
 
 import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.*;
 
 public class client {
 	public void client() {
 		DataInputStream dataInputStream = null;
 		try {
-			Socket socket = new Socket("192.168.1.173", 6666);
+			//ip do host 192.168.1.173
+			Socket socket = new Socket("192.168.1.154", 6666);
 			dataInputStream = new DataInputStream(socket.getInputStream());
 			int bytes = 0;
 			FileOutputStream fileOutputStream = new FileOutputStream("copia.txt");
@@ -38,22 +41,54 @@ public class client {
 		try {
 			File file = new File("copia.txt");
 			File file2 = new File("originalCodes.txt");
+			List<String> one = new ArrayList<>();
+			List<String> two = new ArrayList<>();
 			BufferedReader bf = new BufferedReader(new FileReader(file));
 			BufferedReader br = new BufferedReader(new FileReader(file2));
 			String line1 = bf.readLine();
 			String line2 = br.readLine();
-
-			while (line1 != null && line2 != null) {
-				if (!line1.contains(line2)) {
-					System.out.println("Arquivo adulterado, transferencia encerrada.");
-					file.delete();
-				}
-			
+			int count1 = 0;
+			int count2 = 0;
+			while(line1 != null) {
+				count1++;
+				one.add(line1);
 				line1 = bf.readLine();
+			}
+			while(line2 != null) {
+				count2++;
+				two.add(line2);
 				line2 = br.readLine();
 			}
-			file2.renameTo(new File("originalCodes.txt"));
-			System.out.println("Arquivo recebido.");
+			boolean var = false;
+			if(one.size() < two.size()) {
+				for(String b : two) {
+					for(String a : one) {
+						if(a.equals(b)) {
+							var = true;
+						}else {
+						System.out.println("Arquivo adulterado. Aplicacao fechada.");
+						file.delete();
+						System.exit(1);
+					}
+				}
+			}
+			}if(one.size()>two.size()) {
+				for(String a : one) {
+					for(String b: two) {
+						if(b.equals(a)) {
+							var = true;
+						}else {
+							System.out.println("Arquivo adulterado. Aplicacao fechada.");
+							file.delete();
+							System.exit(1);
+						}
+					}
+				}
+			}
+			
+			file.renameTo(new File("originalCodes.txt"));
+			System.out.println("Transferencia concluida.");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
