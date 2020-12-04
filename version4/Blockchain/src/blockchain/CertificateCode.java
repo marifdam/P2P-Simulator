@@ -116,6 +116,9 @@ public class CertificateCode {
 				String compare = bflines;
 				if(compare.equals(original)){
 					System.out.println("Seu codigo e valido.");
+				}else {
+					System.out.println("Codigo invalido.");
+					System.exit(1);
 				}
 				bflines = bf.readLine();
 			}
