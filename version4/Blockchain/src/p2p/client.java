@@ -10,7 +10,7 @@ public class client {
 		DataInputStream dataInputStream = null;
 		try {
 			//ip do host 192.168.1.173
-			Socket socket = new Socket("192.168.1.154", 6666);
+			Socket socket = new Socket("192.168.1.173", 6666);
 			dataInputStream = new DataInputStream(socket.getInputStream());
 			int bytes = 0;
 			FileOutputStream fileOutputStream = new FileOutputStream("copia.txt");
@@ -54,6 +54,7 @@ public class client {
 				one.add(line1);
 				line1 = bf.readLine();
 			}
+		
 			while(line2 != null) {
 				count2++;
 				two.add(line2);
@@ -63,7 +64,7 @@ public class client {
 			boolean var = false;
 			if(two.size() < one.size()) {
 				for(int i=0; i< two.size(); i++) {
-					if(one.get(i).equals(two.get(i))){
+					if(two.get(i) == one.get(i)){
 						var = true;
 					}else {
 						System.out.println("Arquivo adulterado");
@@ -71,9 +72,9 @@ public class client {
 						System.exit(1);
 					}
 				}
-			}if(two.size() > one.size()) {
+			}else if(two.size() > one.size()) {
 				for(int i =0; i< one.size(); i++) {
-					if(two.get(i).equals(one.get(i))) {
+					if(one.get(i) == two.get(i)) {
 						var=true;
 					}else {
 						System.out.println("Arquivo adulterado");
