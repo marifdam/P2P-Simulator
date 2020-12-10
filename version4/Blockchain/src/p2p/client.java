@@ -10,7 +10,7 @@ public class client {
 		DataInputStream dataInputStream = null;
 		try {
 			//ip do host 192.168.1.173
-			Socket socket = new Socket("192.168.1.154", 6666);
+			Socket socket = new Socket("192.168.1.173", 6666);
 			dataInputStream = new DataInputStream(socket.getInputStream());
 			int bytes = 0;
 			FileOutputStream fileOutputStream = new FileOutputStream("copia.txt");
@@ -54,41 +54,40 @@ public class client {
 				one.add(line1);
 				line1 = bf.readLine();
 			}
+		
 			while(line2 != null) {
 				count2++;
 				two.add(line2);
 				line2 = br.readLine();
 			}
+			
 			boolean var = false;
-			if(one.size() < two.size()) {
-				for(String b : two) {
-					for(String a : one) {
-						if(a.equals(b)) {
-							var = true;
-						}else {
-						System.out.println("Arquivo adulterado. Aplicacao fechada.");
+			if(two.size() < one.size()) {
+				for(int i=0; i< two.size(); i++) {
+					if(two.get(i) == one.get(i)){
+						var = true;
+					}else {
+						System.out.println("Arquivo adulterado");
+						file.delete();
+						System.exit(1);
+					}
+				}
+			}else if(two.size() > one.size()) {
+				for(int i =0; i< one.size(); i++) {
+					if(one.get(i) == two.get(i)) {
+						var=true;
+					}else {
+						System.out.println("Arquivo adulterado");
 						file.delete();
 						System.exit(1);
 					}
 				}
 			}
-			}if(one.size()>two.size()) {
-				for(String a : one) {
-					for(String b: two) {
-						if(b.equals(a)) {
-							var = true;
-						}else {
-							System.out.println("Arquivo adulterado. Aplicacao fechada.");
-							file.delete();
-							System.exit(1);
-						}
-					}
-				}
-			}
-			
+				
+			if(var == true) {
 			file.renameTo(new File("originalCodes.txt"));
 			System.out.println("Transferencia concluida.");
-			
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
