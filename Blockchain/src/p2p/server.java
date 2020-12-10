@@ -1,68 +1,36 @@
 package p2p;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.*;
+
+import javax.swing.JFileChooser;
+
+import java.io.*;
 
 public class server {
-	private ServerSocket serverSocket;
-	private Socket socket;
-	private Map<String, ObjectOutputStream> streamMap = new HashMap<String, ObjectOutputStream>();
-	
-	public server() {
+	public void server() {
+		DataOutputStream dataOutputStream = null;
 		try {
-			serverSocket = new ServerSocket(6066);
-			System.out.println("Server on ");
-			
-			while(true) {
-				socket = serverSocket.accept();
-				new Thread(new ListenerSocket(socket)).start();
-				
+			ServerSocket socket = new ServerSocket(6666);
+			System.out.println("Aguardando receptor...");
+			Socket s = socket.accept();
+			dataOutputStream = new DataOutputStream(s.getOutputStream());
+			int bytes = 0;
+			File file = new File("originalCodes.txt");
+			FileInputStream fileInputStream = new FileInputStream(file);
+			System.out.println("Enviando arquivo...");
+			// send file size
+			dataOutputStream.writeLong(file.length());
+			// break file into chunks
+			byte[] buffer = new byte[4 * 1024];
+			while ((bytes = fileInputStream.read(buffer)) != -1) {
+				dataOutputStream.write(buffer, 0, bytes);
+				dataOutputStream.flush();
 			}
-		}catch(IOException e) {
+			System.out.println("Transferencia finalizada.");
+			fileInputStream.close();
+			dataOutputStream.close();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private class ListenerSocket implements Runnable{
-		private ObjectOutputStream outputStream;
-		private ObjectInputStream inputStream;
-		
-		public ListenerSocket(Socket socket) throws IOException{
-			this.outputStream = new ObjectOutputStream(socket.getOutputStream());
-			this.inputStream = new ObjectInputStream(socket.getInputStream());
-		}
-		@Override
-		public void run() {
-			FileMessage message = null;
-			try {
-				while((message = (FileMessage) inputStream.readObject()) != null){
-					streamMap.put(message.getClient(), outputStream);
-					if(message.getFile() != null) {
-						for(Map.Entry<String, ObjectOutputStream> kv : streamMap.entrySet()) {
-							if(!message.getClient().equals(kv.getKey())) {
-								kv.getValue().writeObject(message);
-							}
-						}
-					}
-				}
-			}catch(IOException e) {
-				streamMap.remove(message.getClient());
-				System.out.println(message.getClient()+"Desconectou");
-				
-			}catch(ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
-	}
-	
-	public static void main(String[] args) {
-		new server();
 	}
 }

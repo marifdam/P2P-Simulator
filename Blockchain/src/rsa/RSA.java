@@ -5,11 +5,7 @@ import java.security.*;
 import java.util.Base64;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-/**
- * Alterar essa classe
- * @author mari
- *
- */
+
 public class RSA {
     public static KeyPair generateKeyPair() throws Exception {
         KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
@@ -77,27 +73,5 @@ public class RSA {
         return publicSignature.verify(signatureBytes);
     }
 
-    public static void main(String... argv) throws Exception {
-        //First generate a public/private key pair
-        KeyPair pair = generateKeyPair();
-        //KeyPair pair = getKeyPairFromKeyStore();
-
-        //Our secret message
-        String message = "the answer to life the universe and everything";
-
-        //Encrypt the message
-        String cipherText = encrypt(message, pair.getPublic());
-
-        //Now decrypt it
-        String decipheredMessage = decrypt(cipherText, pair.getPrivate());
-
-        System.out.println(decipheredMessage);
-
-        //Let's sign our message
-        String signature = sign("foobar", pair.getPrivate());
-
-        //Let's check the signature
-        boolean isCorrect = verify("foobar", signature, pair.getPublic());
-        System.out.println("Signature correct: " + isCorrect);
-    }
+   
 }
